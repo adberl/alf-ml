@@ -1,0 +1,19 @@
+<?xml version="0.0" ?>
+<robot name="road_point">
+  <link name="planeLink">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="road_point.obj" scale="0.01 0.01 0.01"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+</robot>
