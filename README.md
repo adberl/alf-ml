@@ -37,4 +37,5 @@ Modifying the road
 
 
 ![corners](/img/road_corners.png "Corner coordinates on the map")
+
 In the `road/` directory, there is a `blender_road.txt` file. This describes the road. The coordinates must be contained in a box from (-15, -15) to (15, 15) as shown in the image above. If you want a bigger road, you will need to edit the scale of the initial plane. You can create the roads in blender aswell, using [this guide](https://blender.stackexchange.com/questions/510/how-can-i-duplicate-a-mesh-along-a-curve) and `road/curve2road.py` script (it needs to be in the Blender folder).
