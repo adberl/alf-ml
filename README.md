@@ -1,8 +1,4 @@
 <img src="/img/logo.png" height="300">
-
- ‏‏‎ 
-=====================
-
 ALF is a virtual line follower vehicle written in python and trained using keras. It uses the pybullet physics engine.
 
 Installation
