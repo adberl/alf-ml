@@ -50,7 +50,9 @@ while 1:
 
 	robot.turn_ahead()
 	print(prediction[0][0], prediction[0][1], prediction[0][2])
-	if(prediction[0][0] >= 0.4):
-		robot.turn_right()
-	if(prediction[0][1] >= 0.4):
-		robot.turn_left()
+	
+	if(prediction[0][0] >= 0.4 or prediction[0][1] >= 0.4):
+		if(prediction[0][0] > prediction[0][1]):
+			robot.turn_right()
+		else:
+			robot.turn_left()

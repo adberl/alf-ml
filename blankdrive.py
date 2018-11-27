@@ -29,10 +29,10 @@ force = 100
 p.setGravity(0, 0, -30)
 
 
-xSlider = p.addUserDebugParameter("positionx", -500, 500, 0)
-ySlider = p.addUserDebugParameter("positiony", -500, 500, 0)
+xSlider = p.addUserDebugParameter("positionx", -15, 15, 0)
+ySlider = p.addUserDebugParameter("positiony", -15, 15, 0)
 
-tile = p.loadURDF("road/road_point.urdf", [15, 15, 0.1] )
+tile = p.loadURDF("road/road_point.urdf", [ 0, 0, 0.1] )
 
 count = 0
 
@@ -44,7 +44,10 @@ while 1:
 
 		p.removeBody(tile)
 		tile = p.loadURDF("road/road_point.urdf", [rp_x, rp_y, 0.1] )
+		
+		count = 0
 
+	count += 1
 	kin = p.getKeyboardEvents()
 
 	if p.B3G_END in kin.keys() and kin[p.B3G_END] == p.KEY_IS_DOWN:

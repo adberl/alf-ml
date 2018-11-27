@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 
-data_end = 60000
+data_end = 100000
 
-train_end = 76000
+train_end = 136000
 
 dataset = np.loadtxt("data/processed_data.txt", delimiter=" ")
 
@@ -27,8 +27,8 @@ model.add(LSTM(6, return_sequences=True))
 model.add(LSTM(3))
 model.add(Dense(3, activation='softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['categorical_accuracy'])
-history = model.fit(inputData, outputData, epochs=12, batch_size=64, validation_data=(iTrainData, oTrainData)) # change this to higher when using more data
+model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['categorical_accuracy'])
+history = model.fit(inputData, outputData, epochs=12, batch_size=100, validation_data=(iTrainData, oTrainData)) # change this to higher when using more data
 
 model_json = model.to_json()
 with open("keras/model.json", "w") as json_file:
