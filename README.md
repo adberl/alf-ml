@@ -30,9 +30,14 @@ In the following examples I'm gonna assume you're using Linux. It works about th
 4. Run `python3 network_train.py`. This will train the network, so you want to tinker with this and try out different neural network layouts.
 5. Once we're done training, we can check how well the bot is doing using the current network by running `python3 testdrivenet.py`
 
-Modifying the road
+Using your own road
 ---------------------
 
 <img src="/img/road_corners.png" height="300">
 
-In the `road/` directory, there is a `blender_road.txt` file. This describes the road. The coordinates must be contained in a box from (-15, -15) to (15, 15) as shown in the image above. If you want a bigger road, you will need to edit the scale of the initial plane. You can create the roads in blender aswell, using [this guide](https://blender.stackexchange.com/questions/510/how-can-i-duplicate-a-mesh-along-a-curve) and `road/curve2road.py` script (it needs to be in the Blender folder).
+Using your own road is now easier than ever! In the `road/` directory, you can find an example road file names `blender_road.txt`. The basic layout is:
+1. First line has a single int indicating the total number of road points
+2. The rest of the lines are road points
+
+The coordinates must be contained in a box from (-15, -15) to (15, 15) as shown in the image above. You can create the roads in blender aswell, using [this guide](https://blender.stackexchange.com/questions/510/how-can-i-duplicate-a-mesh-along-a-curve) and `road/curve2road.py` script (it needs to be in the Blender folder).
+Aditionally, you can create the road in a program of your choice, and just output the coordinates. Put the coordinates (unscaled) in a text file, first line being your number of road points and use `python3 scale_road.py -i <input file> -o <output file>` to scale them in order to fit the map.
