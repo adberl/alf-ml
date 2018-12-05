@@ -10,7 +10,7 @@ class Road:
 	idx = index.Index(properties = idx_prop)
 	road_points_list = [] # list of lists, contains lists of 3 floats of coordinates
 
-	def __init__(self, road_path: str):  #road_path is the relative path to the road text file which contains the coords;
+	def __init__(self, road_path: str, visualize=True):  #road_path is the relative path to the road text file which contains the coords;
 		road_file = open(road_path, 'r')
 		self.number = int(road_file.readline())
 		file_coords = road_file.readlines()
@@ -24,7 +24,7 @@ class Road:
 
 			self.idx.insert(idx_id, ((rp_x - rp_half), (rp_y - rp_half), (rp_x + rp_half), (rp_y + rp_half)))
 			self.road_points_list.append([rp_x, rp_y])
-			p.loadURDF("road/road_point.urdf", [rp_x, rp_y, 0.1] )
+			if visualize: p.loadURDF("road/road_point.urdf", [rp_x, rp_y, 0.1] )
 			idx_id += 1
 
 	def serveNet(self, bot: Goodbot, start_sensor=0, end_sensor=6) -> np.array:
