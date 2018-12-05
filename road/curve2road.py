@@ -17,4 +17,5 @@ for i in sel_obj:
  
 print(str(total-1) + '\n' + output, file=file)
 file.close()
+
 print('done')
