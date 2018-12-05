@@ -22,7 +22,7 @@ p.setRealTimeSimulation(1)
 
 p.resetDebugVisualizerCamera(25, 0, -89.9, [0, 0, 0])
 
-road = Road('road/blender_road.txt', False)
+road = Road('road/blender_road.txt')
 robot = Goodbot("goodbot/goodbot.urdf", road.fetchStart() + [0.3])
 
 p.setRealTimeSimulation(1)

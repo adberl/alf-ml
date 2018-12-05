@@ -20,8 +20,8 @@ p.setRealTimeSimulation(1)
 
 
 #for i in file_coords:
-#    coords = i.split(' ')
-#    p.loadURDF("road_point.urdf", [float(coords[0]), float(coords[1]), 0.1] )
+#	coords = i.split(' ')
+#	p.loadURDF("road_point.urdf", [float(coords[0]), float(coords[1]), 0.1] )
 
 """ a road point is 0.3x0.3 coordinates big"""
 
@@ -51,39 +51,47 @@ write_list = []
 file = open('data/training_data.txt', 'a')
 """"""""""""""""""""""""
 
+iteration = 0
+WRITE_FREQ = 1000
+
 while 1:
-    """  outputs  """
-    is_right = 0
-    is_left = 0
-    is_forward = 0
-    is_backward = 0
-    """"""""""""""""""
+	"""  outputs  """
+	is_right = 0
+	is_left = 0
+	is_forward = 0
+	is_backward = 0
+	""""""""""""""""""
 
-    kin = p.getKeyboardEvents()
+	kin = p.getKeyboardEvents()
 
-    if p.B3G_END in kin.keys() and kin[p.B3G_END] == p.KEY_IS_DOWN:
-        file.close()
-        break
-    if rarr in kin.keys() and kin[rarr] == p.KEY_IS_DOWN:
-        robot.turn_right()
-        is_right = 1
-    elif larr in kin.keys() and kin[larr] == p.KEY_IS_DOWN:
-        robot.turn_left()
-        is_left = 1
-    else: #if not (larr in kin.keys() or rarr in kin.keys()):
-        robot.turn_ahead()
-    if uarr in kin.keys() and kin[uarr] == p.KEY_IS_DOWN:
-        robot.go_forward(velocity, force)
-        is_forward = 1
-    elif darr in kin.keys() and kin[darr] == p.KEY_IS_DOWN:
-        robot.go_forward(-velocity, force)
-        is_backward = 1
-    else:
-        robot.go_forward(0, 0)
+	if 120 in kin.keys() and kin[120] == p.KEY_IS_DOWN:
+		file.close()
+		break
+	if rarr in kin.keys() and kin[rarr] == p.KEY_IS_DOWN:
+		robot.turn_right()
+		is_right = 1
+	elif larr in kin.keys() and kin[larr] == p.KEY_IS_DOWN:
+		robot.turn_left()
+		is_left = 1
+	else:
+		robot.turn_ahead()
+	if uarr in kin.keys() and kin[uarr] == p.KEY_IS_DOWN:
+		robot.go_forward(velocity, force)
+		is_forward = 1
+	elif darr in kin.keys() and kin[darr] == p.KEY_IS_DOWN:
+		robot.go_forward(-velocity, force)
+		is_backward = 1
+	else:
+		robot.go_forward(0, 0)
 
-#    road.sensors_output(robot)
-    write_list = road.sensors_output(robot) + robot.sensors_pos_string() + [is_right, is_left]
-    if is_forward == 0:
-        continue
+	iteration += 1
 
-    print(*write_list, sep=' ', file=file)
+	if iteration % WRITE_FREQ == 0:
+		write_list = road.sensors_output(robot) + robot.sensors_pos_string() + [is_right, is_left]
+		if is_forward == 0:
+			continue
+
+		print(*write_list, sep=' ', file=file)
+		print('write #{}'.format(iteration/1000))
+		
+print('done')
