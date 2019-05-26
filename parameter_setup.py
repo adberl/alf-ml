@@ -2,7 +2,7 @@ import pybullet as p
 import pybullet_data
 from goodbot import Goodbot
 from threading import Timer
-from road import Road
+from road_pi import Road
 import math
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,7 +63,9 @@ file = open('data/training_data.txt', 'a')
 """"""""""""""""""""""""
 
 iteration = 0
-WRITE_FREQ = 6000
+WRITE_FREQ = 10000
+
+distSlide = p.addUserDebugParameter("Reference Distance", 0, 1, 0)
 
 while 1:
 	"""  outputs  """
@@ -98,14 +100,18 @@ while 1:
 	iteration += 1
 
 	if iteration % WRITE_FREQ == 0:
+		ref_distance = p.readUserDebugParameter(distSlide)
 		rdpt_all = road.sensors_output(robot)
 		sensors = robot.sensors_pos()
+		print_string = ""
 		for i in range(0,6):
 			rdpt_id = int(rdpt_all[i])
 			sensor_x = float(sensors[i][0])
 			sensor_y = float(sensors[i][1])
-			print("{}: [{}] x:{} y:{}", i, rdpt_id, sensor_x, sensor_y)
+			#print("%i: [%i] x:%f y:%f" % (i, rdpt_id, sensor_x, sensor_y))
 			distance = math.sqrt( (sensor_x-road_points_list[rdpt_id][0])**2 + (sensor_y-road_points_list[rdpt_id][1])**2 )
+			print_string += "%s " % ('1' if distance < ref_distance else '0')
+		print(print_string)
 
 		write_list = road.sensors_output(robot) + robot.sensors_pos_string() + [is_right, is_left]
 

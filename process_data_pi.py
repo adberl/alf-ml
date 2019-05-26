@@ -8,6 +8,8 @@ file_coords = road_file.readlines()
 
 processed_file = open('data/processed_data_pi.txt', 'w')
 
+ref_distance = 0.36
+
 for i in file_coords:
 
 	coords = i.split(' ')
@@ -31,7 +33,7 @@ with open('data/training_data.txt') as training_file:
 			sensor_x = float(line_split[2*i+6])
 			sensor_y = float(line_split[2*i+7])
 			distance = math.sqrt( (sensor_x-road_points_list[rdpt_id][0])**2 + (sensor_y-road_points_list[rdpt_id][1])**2 )
-			tempstr += ("1" if distance >  0.5 else "0") + ' '
+			tempstr += ("0" if distance >  ref_distance else "1") + ' '
 		tempstr += line_split[18] + ' ' + line_split[19].rstrip('\n') + ' ' + ('1' if line_split[18] == line_split[19].rstrip('\n') else '0') + '\n'
 		processed_file.write(tempstr)
 print('processed {} lines of data'.format(total/6))

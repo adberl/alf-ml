@@ -44,16 +44,16 @@ robot.go_forward(velocity, force)
 while 1:
 
 	inputArray = road.serveNet(robot)
-	print(inputArray)
+#	print(inputArray)
 	inputArray = np.reshape(inputArray, (inputArray.shape[0], 1, inputArray.shape[1]))
-	print(inputArray)
+#	print(inputArray)
 	prediction = model.predict(inputArray)
 #	print(prediction) # right, left, forwards, backwards
 
 	robot.turn_ahead()
 	print(prediction[0][0], prediction[0][1], prediction[0][2])
 
-	if(prediction[0][0] >= 0.4 or prediction[0][1] >= 0.4):
+	if(prediction[0][0] >= 0.7 or prediction[0][1] >= 0.7):
 		if(prediction[0][0] > prediction[0][1]):
 			robot.turn_right()
 		else:

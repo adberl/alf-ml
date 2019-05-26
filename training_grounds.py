@@ -2,7 +2,7 @@ import pybullet as p
 import pybullet_data
 from goodbot import Goodbot
 from threading import Timer
-from road import Road
+from road_pi import Road
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 phyCl = p.connect(p.GUI) # SETTING UP THE ENVIRONMENT
@@ -93,5 +93,5 @@ while 1:
 
 		print(*write_list, sep=' ', file=file)
 		print('write #{}'.format(iteration/1000))
-		
+
 print('done')
