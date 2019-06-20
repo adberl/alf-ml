@@ -53,6 +53,7 @@ file = open('data/training_data.txt', 'a')
 
 iteration = 0
 WRITE_FREQ = 1000
+running  = False
 
 while 1:
 	"""  outputs  """
@@ -63,6 +64,9 @@ while 1:
 	""""""""""""""""""
 
 	kin = p.getKeyboardEvents()
+
+	if ord('s') in kin.keys() and kin[ord('s')] == p.KEY_IS_DOWN:
+		running = True
 
 	if 120 in kin.keys() and kin[120] == p.KEY_IS_DOWN:
 		file.close()
@@ -86,12 +90,13 @@ while 1:
 
 	iteration += 1
 
-	if iteration % WRITE_FREQ == 0:
+	if iteration % WRITE_FREQ == 0 and running:
 		write_list = road.sensors_output(robot) + robot.sensors_pos_string() + [is_right, is_left]
 		if is_forward == 0:
 			continue
 
 		print(*write_list, sep=' ', file=file)
 		print('write #{}'.format(iteration/1000))
+		print(write_list)
 		
 print('done')

@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 
-data_end = 100000
+data_end = 5500
 
-train_end = 136000
+train_end = 6500
 
 dataset = np.loadtxt("data/processed_data.txt", delimiter=" ")
 
